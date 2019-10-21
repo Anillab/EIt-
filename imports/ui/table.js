@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Eits } from '../api/eit.js'
 import Form from './form.js'
 import { withTracker } from 'meteor/react-meteor-data';
@@ -28,8 +29,15 @@ const TableBody=(props) =>{
   return(
     <tbody>
       {props.eits.map(eit => (
-        <tr>
-          <td><input type="checkbox" /></td>
+        <tr key={eit._id}>
+          <td><input type="checkbox" checked={eit.checked} onChange={e => {
+            e.preventDefault();
+            if (e.target.checked) {
+              Meteor.call("eits.setChecked", eit._id, true);
+            } else {
+              Meteor.call("eits.setChecked", eit._id, false);
+            }
+          }} /></td>
           <td>{eit.firstName}</td>
           <td>{eit.lastName}</td>
           <td>{eit.email}</td>
@@ -39,7 +47,9 @@ const TableBody=(props) =>{
           <td><button onClick={() => {
             Eits.remove(eit._id);
           }} > Delete</button></td>
-          <td><button> Edit</button></td>
+          <td><button onClick={()=>{
+            //
+          }}> Edit</button></td>
 
         </tr>
       ))}
@@ -50,11 +60,13 @@ const TableBody=(props) =>{
 
 class Table extends Component{
    render(){
-          console.log(this.props.eits);
+          // console.log(this.props.eits);
 
      return(
     <div className='Container'>
-    <button> Delete All</button>
+    <button onClick={() => {
+      Meteor.call("eits.bulkDelete");
+    }}> Delete All</button>
     <table>
     <TableHeader />
     <TableBody eits={this.props.eits} />

@@ -4,6 +4,7 @@ import { state } from './form.js'
 import Table from './table.js'
 
 export default class App extends Component {
+
   render(){
     return (
       <div className='App'>
