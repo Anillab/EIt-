@@ -3,7 +3,6 @@ import { Meteor } from 'meteor/meteor';
 
 export const Eits = new Mongo.Collection('eits');
 
-
 Meteor.methods({
   "eits.setChecked"(id, isChecked) {
     Eits.update(id, {

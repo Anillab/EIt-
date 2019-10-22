@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Eits } from '../api/eit.js'
-export default class Form extends Component{
+import { Eits } from '../api/eit.js';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
+export default class FormEit extends Component{
 
   state = {
     firstName: "",

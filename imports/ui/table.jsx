@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Eits } from '../api/eit.js'
-import Form from './form.js'
+import Form from './form.jsx'
 import { withTracker } from 'meteor/react-meteor-data';
 
 const TableHeader= () =>{
@@ -48,7 +48,7 @@ const TableBody=(props) =>{
             Eits.remove(eit._id);
           }} > Delete</button></td>
           <td><button onClick={()=>{
-            //
+
           }}> Edit</button></td>
 
         </tr>
