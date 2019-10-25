@@ -3,12 +3,13 @@ import { Meteor } from 'meteor/meteor';
 import { Eits } from '../api/eit.js'
 import Form from './form.jsx'
 import { withTracker } from 'meteor/react-meteor-data';
+import { Link } from 'react-router-dom';
 
 const TableHeader= () =>{
   return(
     <thead>
       <tr>
-          <th></th>
+          <th>#</th>
           <th>First Name</th>
           <th>Surname</th>
           <th>Email Adress</th>
@@ -17,11 +18,7 @@ const TableHeader= () =>{
           <th>Country</th>
           <th>Delete</th>
           <th>Edit</th>
-
-
-
       </tr>
-
     </thead>
   )
 }
@@ -44,17 +41,14 @@ const TableBody=(props) =>{
           <td>{eit.phoneNumber}</td>
           <td>{eit.gender}</td>
           <td>{eit.country}</td>
-          <td><button onClick={() => {
-            Eits.remove(eit._id);
-          }} > Delete</button></td>
-          <td><button onClick={()=>{
-
-          }}> Edit</button></td>
-
-        </tr>
+   {(props.currentUser)?
+     <td><button onClick={() => {
+       Eits.remove(eit._id);
+     }} > Delete</button></td>:("")}
+     <td><button><Link to={`/edit/${eit._id}`}>Edit</Link></button></td>
+     </tr>
       ))}
     </tbody>
-
   )
 }
 
@@ -66,10 +60,12 @@ class Table extends Component{
     <div className='Container'>
     <button onClick={() => {
       Meteor.call("eits.bulkDelete");
-    }}> Delete All</button>
+    }}> Delete Selected</button>
+    <button> <Link to={`/`}>Back</Link></button>
+
     <table>
     <TableHeader />
-    <TableBody eits={this.props.eits} />
+    <TableBody currentUser={this.props.currentUser} eits={this.props.eits} />
     </table>
     </div>
      )
@@ -80,5 +76,6 @@ class Table extends Component{
 export default withTracker(()=>{
   return{
     eits:Eits.find({}).fetch(),
+    currentUser: Meteor.user(),
   };
 })(Table)

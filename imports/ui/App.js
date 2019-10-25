@@ -3,20 +3,14 @@ import  FormEit from './form.jsx'
 import { state } from './form.jsx';
 import Table from './table.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AccountsUIWrapper from './AccountsUIWrapper.js';
 import {withTracker} from "meteor/react-meteor-data";
 import { Meteor } from 'meteor/meteor';
+
 class App extends Component {
 
   render(){
     return (
       <div className='App'>
-      <header>
-
-      <h1>Welcome to Mest!</h1>
-      <h3>Register Below</h3>
-      < AccountsUIWrapper />
-      </header>
           <h1>Eit</h1>
 
         {
@@ -29,7 +23,6 @@ class App extends Component {
         }
 
           <div className='highlight'>
-          <Table />
           </div>
       </div>
     )

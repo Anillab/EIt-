@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Eits } from '../api/eit.js';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import Table from './table.jsx';
+import {withTracker} from "meteor/react-meteor-data";
+import { Link } from 'react-router-dom';
 
 export default class FormEit extends Component{
 
@@ -94,7 +97,10 @@ onSubmit= event =>{
   </label>
 
   <button onClick={event =>this.onSubmit(event)}>Submit</button>
+  <button> <Link to={`/table/`}>View EITs</Link></button>
+
 </form>
+
     )
   }
 }

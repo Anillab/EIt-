@@ -10,6 +10,12 @@ Meteor.methods({
     });
   },
 
+  "eits.update"(id, newData) {
+    Eits.update(id, {
+      $set: {...newData}
+    });
+  },
+
   "eits.bulkDelete"() {
     const checkedEits = Eits.find({ checked: { $eq: true } }).fetch();
     checkedEits.forEach(eit => Eits.remove(eit._id));
